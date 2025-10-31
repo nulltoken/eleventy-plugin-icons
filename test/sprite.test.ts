@@ -5,28 +5,41 @@ import pluginIcons from '../src/index';
 
 import { getFixtureContentFromURL, withFixture } from './utils';
 
-const elev = new Eleventy(withFixture('sprite'), '_site', {
-	config: (eleventyConfig: any) => {
-		eleventyConfig.addPlugin(pluginIcons, {
-			mode: 'sprite',
-			sources: [
-				{
-					name: 'custom',
-					path: 'test/fixtures/icons',
-					default: true,
-					getFileName: (icon: string) => `icon-${icon}.svg`,
-				},
-				{ name: 'lucide', path: 'node_modules/lucide-static/icons' },
-			],
-			icon: {
-				shortcode: 'sprite',
-				errorNotFound: false,
+function buildOptions(writeFile?: string): any {
+	const options: any = {
+		mode: 'sprite',
+		sources: [
+			{
+				name: 'custom',
+				path: 'test/fixtures/icons',
+				default: true,
+				getFileName: (icon: string) => `icon-${icon}.svg`,
 			},
-		});
-	},
+			{ name: 'lucide', path: 'node_modules/lucide-static/icons' },
+		],
+		icon: {
+			shortcode: 'sprite',
+			errorNotFound: false,
+		},
+	};
+
+	if (writeFile !== undefined) {
+		options.sprite = {
+			writeFile: writeFile,
+		};
+	}
+	return options;
+}
+
+const elevSpritesheet = new Eleventy(withFixture('sprite'), '_site', {
+	config: (() => {
+		return (eleventyConfig: any) => {
+			eleventyConfig.addPlugin(pluginIcons, buildOptions());
+		};
+	})(),
 });
 
-const results = await elev.toJSON();
+const results = await elevSpritesheet.toJSON();
 
 test('a spritesheet should be created with at least one icon on the page', () => {
 	const file = getFixtureContentFromURL(results, '/spritesheet/');
@@ -47,4 +60,27 @@ test('a spritesheet should NOT be created with zero icons on the page', () => {
 	const file = getFixtureContentFromURL(results, '/empty-spritesheet/');
 
 	expect(file).toBe('');
+});
+
+test('supports external svg reference when writefile is set', async () => {
+	const elevExternal = new Eleventy(withFixture('sprite'), '_site', {
+		config: (() => {
+			return (eleventyConfig: any) => {
+				eleventyConfig.addPlugin(
+					pluginIcons,
+					buildOptions('assets/icons/sprites.svg'),
+				);
+			};
+		})(),
+	});
+
+	const results = await elevExternal.toJSON();
+	const file = getFixtureContentFromURL(
+		results,
+		'/external-reference/',
+	);
+
+	expect(file).toBe(
+		'<svg class="icon icon-star"><use href="/assets/icons/sprites.svg#icon-star"></use></svg>',
+	);
 });
