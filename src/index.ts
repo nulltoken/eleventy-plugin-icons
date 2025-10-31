@@ -84,6 +84,28 @@ export default function (
 		return `/${filepath}`;
 	};
 
+	eleventyConfig.addAsyncShortcode(
+		'getSvgSpriteUrl',
+		async (): Promise<string> => {
+			if (options.mode === 'inline') {
+				throw new Error(
+					"Incorrect usage of 'getSvgSpriteUrl' shortcode has been detected. This can only be used in 'sprite' mode.",
+				);
+			}
+
+			if (options.sprite.writeFile === false) {
+				throw new Error(
+					"Incorrect usage of 'getSvgSpriteUrl' shortcode has been detected. This can only be used when 'sprite.writeFile' is defined.",
+				);
+			}
+
+			const url = await getSvgSpriteUrl();
+			assert(typeof url === 'string', 'Invalid url type');
+
+			return url;
+		},
+	);
+
 	if (typeof options.sprite.writeFile === 'string') {
 		eleventyConfig.on(
 			'eleventy.after',

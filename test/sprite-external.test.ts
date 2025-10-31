@@ -17,8 +17,6 @@ describe('supports external svg reference', () => {
 		const results = await elev.toJSON();
 		const file = getFixtureContentFromURL(results, '/external-reference/');
 
-		expect(file).toBe(
-			'<svg class="icon icon-apple"><use href="/assets/icons/sprites.svg#icon-apple"></use></svg>',
-		);
+		expect(file).toMatchSnapshot();
 	});
 });
