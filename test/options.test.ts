@@ -37,4 +37,23 @@ describe('validateOptions()', () => {
 		}
 		expect(valid).toBe(false);
 	});
+
+	test('should throw error when both "writeFile" and "writeToDirectory" are set', () => {
+		let valid: boolean;
+		try {
+			validateOptions({
+				...defaultOptions,
+				mode: 'sprite',
+				// @ts-expect-error - Don't choke on missing properties (as we rely on default values)
+				sprite: {
+					writeFile: 'icons/sprite.svg',
+					writeToDirectory: 'icons/',
+				},
+			});
+			valid = true;
+		} catch {
+			valid = false;
+		}
+		expect(valid).toBe(false);
+	});
 });

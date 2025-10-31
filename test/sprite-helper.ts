@@ -1,13 +1,17 @@
 import Eleventy from '@11ty/eleventy';
-import extend from 'just-extend';
+import merge from 'merge';
 
 import pluginIcons from '../src/index';
 import { withFixture } from './utils';
 
-export const buildEleventy = (fixture: string, options: any) => {
+export const buildEleventy = (
+	fixture: string,
+	options: any,
+	outputDirectory = '_site',
+) => {
 	const config = buildConfig();
 
-	return new Eleventy(withFixture(fixture), '_site', config);
+	return new Eleventy(withFixture(fixture), outputDirectory, config);
 
 	function buildConfig(): any {
 		return {
@@ -38,7 +42,5 @@ export const buildOptions = (
 		},
 	};
 
-	extend(true, options, additionalOptions);
-
-	return options;
+	return merge.recursive(true, options, additionalOptions);
 };
