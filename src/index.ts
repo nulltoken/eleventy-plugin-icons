@@ -93,6 +93,7 @@ export default function (
 		switch (options.mode) {
 			case 'inline':
 				return parseSVG(
+						undefined,
 					content,
 					attributes,
 					options.icon.overwriteExistingAttributes,

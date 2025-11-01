@@ -96,11 +96,11 @@ export const createSprite = memoize(
 				const content = await icon.content(options);
 				// If content exists, convert it to a symbol element and add attributes.
 				if (content) {
-					return parseSVG(
-						content,
-						{ id: options.icon.id(icon.name, icon.source) },
-						true,
-					)
+					const id = options.icon.id(icon.name, icon.source);
+					const svgOut = parseSVG(id, content, { id }, true);
+
+					console.log(svgOut);
+					return svgOut[0]
 						.replace(/<svg/, '<symbol')
 						.replace(/<\/svg>/, '</symbol>');
 				}

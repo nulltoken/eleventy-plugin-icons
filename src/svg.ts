@@ -29,17 +29,46 @@ const builder = new XMLBuilder({
  * @returns The modified SVG string.
  */
 export function parseSVG(
+	id: string | undefined,
 	raw: string,
 	attributes: Attributes,
 	overwrite: boolean,
-) {
+): [string, string] {
 	const parsed = parser.parse(raw);
+	const defs: any[] = [];
+	const defIds: string[] = [];
+
 	// biome-ignore lint/suspicious/noImplicitAnyLet: fast-xml-parser's XMLParser#parse() is poorly typed.
 	let svg;
 	let existingAttributes: Attributes = {};
 	for (const node of parsed) {
 		if ('svg' in node) {
 			svg = node.svg;
+
+			if (id !== undefined) {
+				for (const subNode of svg) {
+					if (!('defs' in subNode)) {
+						continue;
+					}
+
+					for (const def of subNode.defs) {
+						if (!('@_id' in def[':@'])) {
+							log.warn("'def' node without an 'id' attribute");
+							continue;
+						}
+
+						defs.push(def);
+
+						const defId = def[':@']['@_id'];
+
+						defIds.push(defId);
+					}
+
+					// TODO: maytbe find an alternative
+					// biome-ignore lint/performance/noDelete: Haven't researched yet a proper way to do this
+					delete subNode.defs;
+				}
+			}
 
 			if (':@' in node) {
 				existingAttributes = node[':@'];
@@ -82,5 +111,15 @@ export function parseSVG(
 	}
 	if (!svg) log.error('No SVG element found.');
 
-	return builder.build(parsed);
+	let strDefs = builder.build(defs) as string;
+	let svgOut = builder.build(parsed) as string;
+
+	for (const defId of defIds) {
+		svgOut = svgOut.replaceAll(`="url(#${defId})"`, `="url(#${id}-${defId})"`);
+		strDefs = strDefs
+			.replaceAll(`id="${defId}"`, `id="${id}-${defId}"`)
+			.replaceAll(`xlink:href="#${defId}"`, `xlink:href="#${id}-${defId}"`);
+	}
+
+	return [svgOut, strDefs];
 }
