@@ -1,5 +1,5 @@
 import Eleventy from '@11ty/eleventy';
-import { expect, test } from 'vitest';
+import { describe, expect, test } from 'vitest';
 
 import pluginIcons from '../src/index';
 
@@ -28,16 +28,11 @@ function buildOptions(writeFile?: string): any {
 			writeFile: writeFile,
 		};
 	}
+
 	return options;
 }
 
-const elevSpritesheet = new Eleventy(withFixture('sprite'), '_site', {
-	config: (() => {
-		return (eleventyConfig: any) => {
-			eleventyConfig.addPlugin(pluginIcons, buildOptions());
-		};
-	})(),
-});
+const elevSpritesheet = buildEleventy(buildOptions());
 
 const results = await elevSpritesheet.toJSON();
 
@@ -62,25 +57,48 @@ test('a spritesheet should NOT be created with zero icons on the page', () => {
 	expect(file).toBe('');
 });
 
-test('supports external svg reference when writefile is set', async () => {
-	const elevExternal = new Eleventy(withFixture('sprite'), '_site', {
-		config: (() => {
-			return (eleventyConfig: any) => {
-				eleventyConfig.addPlugin(
-					pluginIcons,
-					buildOptions('assets/icons/sprites.svg'),
-				);
-			};
-		})(),
+describe('supports external svg reference when writeFile is set', () => {
+	const pluginOptions = buildOptions('assets/icons/sprites.svg');
+
+	test('with default pathPrefix', async () => {
+		const elevExternal = buildEleventy(pluginOptions);
+
+		const results = await elevExternal.toJSON();
+
+		const file = getFixtureContentFromURL(results, '/external-reference/');
+
+		expect(file).toBe(
+			'<svg class="icon icon-star"><use href="/assets/icons/sprites.svg#icon-star"></use></svg>',
+		);
 	});
 
-	const results = await elevExternal.toJSON();
-	const file = getFixtureContentFromURL(
-		results,
-		'/external-reference/',
-	);
+	test('with specified pathPrefix', async () => {
+		const elevExternal = buildEleventy(pluginOptions, '/gh-pages');
 
-	expect(file).toBe(
-		'<svg class="icon icon-star"><use href="/assets/icons/sprites.svg#icon-star"></use></svg>',
-	);
+		const results = await elevExternal.toJSON();
+
+		const file = getFixtureContentFromURL(results, '/external-reference/');
+
+		expect(file).toBe(
+			'<svg class="icon icon-star"><use href="/gh-pages/assets/icons/sprites.svg#icon-star"></use></svg>',
+		);
+	});
 });
+
+function buildEleventy(options: any, pathPrefix?: string) {
+	const config = buildConfig();
+
+	if (pathPrefix !== undefined) {
+		config.pathPrefix = pathPrefix;
+	}
+
+	return new Eleventy(withFixture('sprite'), '_site', config);
+
+	function buildConfig(): any {
+		return {
+			config: (eleventyConfig: any) => {
+				eleventyConfig.addPlugin(pluginIcons, options);
+			},
+		};
+	}
+}

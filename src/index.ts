@@ -18,6 +18,10 @@ export default function (
 	eleventyConfig: any,
 	opts: Prettify<DeepPartial<Options>>,
 ) {
+	const pluginHtmlBase = eleventyConfig.resolvePlugin(
+		'@11ty/eleventy/html-base-plugin',
+	);
+
 	const usedIcons: Icon[] = [];
 
 	if (opts === null || typeof opts !== 'object')
@@ -80,7 +84,10 @@ export default function (
 			return undefined;
 		}
 
-		return `/${filepath}`;
+		return pluginHtmlBase.applyBaseToUrl(
+			`/${filepath}`,
+			eleventyConfig.pathPrefix,
+		);
 	};
 
 	if (typeof options.sprite.writeFile === 'string') {
