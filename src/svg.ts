@@ -111,8 +111,14 @@ export function parseSVG(
 	}
 	if (!svg) log.error('No SVG element found.');
 
-	let strDefs = builder.build(defs) as string;
 	let svgOut = builder.build(parsed) as string;
+
+	if (id === undefined)
+	{
+		return [svgOut, '']
+	}
+
+	let strDefs = builder.build(defs) as string;
 
 	for (const defId of defIds) {
 		svgOut = svgOut.replaceAll(`="url(#${defId})"`, `="url(#${id}-${defId})"`);
@@ -121,5 +127,5 @@ export function parseSVG(
 			.replaceAll(`xlink:href="#${defId}"`, `xlink:href="#${id}-${defId}"`);
 	}
 
-	return [svgOut, id !== undefined ? strDefs : ''];
+	return [svgOut, strDefs];
 }
