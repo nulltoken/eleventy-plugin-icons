@@ -78,7 +78,7 @@ export default function (
 		},
 	);
 
-	const generateSVG = async (icon: Icon) => {
+	const generateSVG = async (icon: Icon): Promise<string> => {
 		const content = await icon.content(options);
 		if (!content) {
 			return '';
@@ -93,11 +93,11 @@ export default function (
 		switch (options.mode) {
 			case 'inline':
 				return parseSVG(
-						undefined,
+					undefined,
 					content,
 					attributes,
 					options.icon.overwriteExistingAttributes,
-				);
+				)[0];
 			case 'sprite':
 				return createSpriteReference(
 					attributes,

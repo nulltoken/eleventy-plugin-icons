@@ -92,29 +92,39 @@ export const createSprite = memoize(
 
 		// Create an array of promises that generate symbol definitions for each icon.
 		const symbols = await Promise.all(
-			[...new Set(sortedIcons)].map(async (icon) => {
-				const content = await icon.content(options);
-				// If content exists, convert it to a symbol element and add attributes.
-				if (content) {
-					const id = options.icon.id(icon.name, icon.source);
-					const svgOut = parseSVG(id, content, { id }, true);
+			[...new Set(sortedIcons)].map(
+				async (icon): Promise<[string, string] | undefined> => {
+					const content = await icon.content(options);
+					// If content exists, convert it to a symbol element and add attributes.
+					if (content) {
+						const id = options.icon.id(icon.name, icon.source);
+						const [svgOut, strDefs] = parseSVG(id, content, { id }, true);
 
-					console.log(svgOut);
-					return svgOut[0]
-						.replace(/<svg/, '<symbol')
-						.replace(/<\/svg>/, '</symbol>');
-				}
-				return '';
-			}),
+						return [
+							svgOut.replace(/<svg/, '<symbol').replace(/<\/svg>/, '</symbol>'),
+							strDefs,
+						];
+					}
+					return undefined;
+				},
+			),
 		);
 
 		// Combine the generated symbol strings and filter out empty ones.
-		const symbolsString = [...new Set(symbols.filter(Boolean))].join('');
-		return symbolsString
-			? `<svg ${attributesToString(
-					options.sprite.attributes,
-				)}><defs>${symbolsString}</defs></svg>`
-			: ''; // Return an empty string if no symbols were generated.
+
+		const parsed = symbols.filter((x) => x !== undefined);
+
+		if (parsed.length === 0) {
+			// Return an empty string if no symbols were generated.
+			return '';
+		}
+
+		const symbolsString = [...new Set(parsed.map((x) => x[0]))].join('');
+		const defsString = [...new Set(parsed.map((x) => x[1]))].join('');
+
+		return `<svg ${attributesToString(
+			options.sprite.attributes,
+		)}><defs>${defsString}</defs>${symbolsString}</svg>`;
 	},
 );
 

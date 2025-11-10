@@ -121,5 +121,5 @@ export function parseSVG(
 			.replaceAll(`xlink:href="#${defId}"`, `xlink:href="#${id}-${defId}"`);
 	}
 
-	return [svgOut, strDefs];
+	return [svgOut, id !== undefined ? strDefs : ''];
 }
