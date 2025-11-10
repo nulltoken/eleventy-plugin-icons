@@ -124,7 +124,8 @@ export function parseSVG(
 		svgOut = svgOut.replaceAll(`="url(#${defId})"`, `="url(#${id}-${defId})"`);
 		strDefs = strDefs
 			.replaceAll(`id="${defId}"`, `id="${id}-${defId}"`)
-			.replaceAll(`xlink:href="#${defId}"`, `xlink:href="#${id}-${defId}"`);
+			.replaceAll(`xlink:href="#${defId}"`, `xlink:href="#${id}-${defId}"`)
+			.replaceAll(`href="#${defId}"`, `href="#${id}-${defId}"`);
 	}
 
 	return [svgOut, strDefs];
