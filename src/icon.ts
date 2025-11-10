@@ -122,6 +122,7 @@ export const createSprite = memoize(
 		const symbolsString = [...new Set(parsed.map((x) => x[0]))].join('');
 		const defsString = [...new Set(parsed.map((x) => x[1]))].join('');
 
+		// TODO: add all xmlns from inner svgs
 		return `<svg ${attributesToString(
 			options.sprite.attributes,
 		)}><defs>${defsString}</defs>${symbolsString}</svg>`;
