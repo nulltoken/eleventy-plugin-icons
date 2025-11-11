@@ -113,9 +113,8 @@ export function parseSVG(
 
 	let svgOut = builder.build(parsed) as string;
 
-	if (id === undefined)
-	{
-		return [svgOut, '']
+	if (id === undefined) {
+		return [svgOut, ''];
 	}
 
 	let strDefs = builder.build(defs) as string;
