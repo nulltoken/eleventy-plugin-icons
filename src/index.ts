@@ -2,6 +2,7 @@ import type { Options } from './options';
 import type { Attributes, DeepPartial, Prettify } from './types';
 
 import assert from 'node:assert';
+import { createHash } from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
@@ -53,7 +54,7 @@ export default function (
 				}
 			}
 
-			relFileUrl ??= await getWrittenSpriteRelativeUrl(options);
+			relFileUrl ??= await getWrittenSpriteRelativeUrl(usedIcons, options);
 			hrefPrefix ??= relFileUrl === undefined ? '' : `/${relFileUrl}`;
 
 			for (const icon of usedIcons.values()) {
@@ -206,17 +207,36 @@ export default function (
 		return await createSprite(icons.concat(extraIcons), options);
 	};
 
+	const buildSpriteUrlFilename = async (icons: Map<string, Icon>) => {
+		return `${hash(await createSpriteWithExtraIcons([...icons.values()]))}.svg`;
+	};
+
 	const getWrittenSpriteRelativeUrl = async (
+		icons: Map<string, Icon>,
 		opts: Options,
 	): Promise<string | undefined> => {
 		if (generationMode === GenerationMode.NamedFile) {
 			return pathToUrl(path.join(opts.sprite.writeFile as string));
 		}
 
+		if (generationMode === GenerationMode.HashedBundle) {
+			const directory = path.join(opts.sprite.writeToDirectory as string);
+			return pathToUrl(
+				path.join(directory, await buildSpriteUrlFilename(icons)),
+			);
+		}
+
 		return undefined;
 	};
 
 	const pathToUrl = (pathStr: string) => pathStr.split(path.sep).join('/');
+
+	const hash = (content: string): string => {
+		const sha256Hash = createHash('sha256').update(content).digest('base64url');
+
+		const hashed = sha256Hash.substring(0, 10);
+		return hashed;
+	};
 
 	const addIfMissing = (container: Map<string, Icon>, icon: Icon) => {
 		if (container.has(icon.id)) {
