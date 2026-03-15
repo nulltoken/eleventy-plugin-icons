@@ -7,14 +7,14 @@ bench('inline example', async () => {
 		mode: 'inline',
 		sources: [{ name: 'lucide', path: 'node_modules/lucide-static/icons' }],
 	});
-});
+}, { iterations: 100 });
 
 bench('sprite example', async () => {
 	await getExampleResultsWithOptions('sprite', {
 		mode: 'sprite',
 		sources: [{ name: 'lucide', path: 'node_modules/lucide-static/icons' }],
 	});
-});
+}, { iterations: 100 });
 
 bench('sprite example (all icons)', async () => {
 	await getExampleResultsWithOptions('sprite', {
@@ -26,7 +26,7 @@ bench('sprite example (all icons)', async () => {
 			},
 		},
 	});
-});
+}, { iterations: 100 });
 
 bench('sprite example (writeFile)', async () => {
 	await getExampleResultsWithOptions('sprite_writeFile', {
@@ -36,4 +36,4 @@ bench('sprite example (writeFile)', async () => {
 			writeFile: 'assets/icons/sprites.svg',
 		},
 	});
-});
+}, { iterations: 100 });
