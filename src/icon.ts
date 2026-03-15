@@ -72,11 +72,19 @@ export class Icon {
 	content = async (options: Options): Promise<string> => {
 		const iconContentKey = `iconContent-${this.path}`;
 
-		const maybe = cache.get(iconContentKey);
-		if (maybe !== undefined) return maybe;
+		const content = await cache.bento.getOrSet({
+			key: iconContentKey, 
+			factory: () => this.contentInternal(options),
+			ttl: '1h',
+		})
+
+		return content;
+	};
+
+	private contentInternal = async (options: Options): Promise<string> => {
 
 		let content: string;
-
+		
 		try {
 			let fromFile = await fs.readFile(this.path, 'utf-8');
 
@@ -96,9 +104,8 @@ export class Icon {
 			content = '';
 		}
 
-		cache.set(iconContentKey, content);
 		return content;
-	};
+	}
 
 	createSpriteReference = (spriteUrl: string): string => {
 		return `<svg ${attributesToString(
@@ -140,12 +147,12 @@ export const createSprite = async (
 		}
 
 		// If content exists, convert it to a symbol element and add attributes.
-		const processed = processXMLIcon(
+		const processed = (await processXMLIcon(
 			icon.path,
 			content,
 			{ id: options.icon.id(icon.name, icon.source) },
 			true,
-		)
+		))
 			.replace(/<svg/, '<symbol') // TODO: Avoid regex for changing tags.
 			.replace(/<\/svg>/, '</symbol>');
 

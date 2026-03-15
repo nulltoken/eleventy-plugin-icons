@@ -30,7 +30,7 @@ const builder = new XMLBuilder({
  * @param overwrite - Flag indicating whether to overwrite existing attributes.
  * @returns The modified SVG string.
  */
-export function processXMLIcon(
+export async function processXMLIcon(
 	path: string,
 	raw: string,
 	attributes: Attributes,
@@ -38,13 +38,15 @@ export function processXMLIcon(
 ) {
 	const processedIconKey = `processedIcon-${path}-${JSON.stringify(attributes)}-${overwrite}`;
 
-	const maybe = cache.get(processedIconKey);
-	if (maybe !== undefined) return maybe;
+	const processed = await cache.bento.getOrSet({
+			key: processedIconKey, 
+			factory: () =>  _processXMLIcon(raw, attributes, overwrite),
+			ttl: '1h',
+		})
 
-	const processed = _processXMLIcon(raw, attributes, overwrite);
-	cache.set(processedIconKey, processed);
 	return processed;
 }
+
 
 /**
  * **INTERNAL: Uncached helper method.**
