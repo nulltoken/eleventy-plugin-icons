@@ -38,12 +38,13 @@ export async function processXMLIcon(
 ) {
 	const processedIconKey = `processedIcon-${path}-${JSON.stringify(attributes)}-${overwrite}`;
 
-	const processed = await cache.bento.getOrSet({
-			key: processedIconKey, 
-			factory: () =>  _processXMLIcon(raw, attributes, overwrite),
-			ttl: '1h',
-		})
+	// const processed = await cache.bento.getOrSet({
+	// 		key: processedIconKey, 
+	// 		factory: () =>  _processXMLIcon(raw, attributes, overwrite),
+	// 		ttl: '1h',
+	// 	})
 
+	const processed = _processXMLIcon(raw, attributes, overwrite);
 	return processed;
 }
 

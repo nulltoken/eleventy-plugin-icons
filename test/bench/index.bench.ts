@@ -16,17 +16,17 @@ bench('sprite example', async () => {
 	});
 }, { iterations: 100 });
 
-bench('sprite example (all icons)', async () => {
-	await getExampleResultsWithOptions('sprite', {
-		mode: 'sprite',
-		sources: [{ name: 'lucide', path: 'node_modules/lucide-static/icons' }],
-		sprite: {
-			extraIcons: {
-				all: true,
-			},
-		},
-	});
-}, { iterations: 100 });
+// bench('sprite example (all icons)', async () => {
+// 	await getExampleResultsWithOptions('sprite', {
+// 		mode: 'sprite',
+// 		sources: [{ name: 'lucide', path: 'node_modules/lucide-static/icons' }],
+// 		sprite: {
+// 			extraIcons: {
+// 				all: true,
+// 			},
+// 		},
+// 	});
+// }, { iterations: 100 });
 
 bench('sprite example (writeFile)', async () => {
 	await getExampleResultsWithOptions('sprite_writeFile', {

@@ -72,6 +72,7 @@ export class Icon {
 	content = async (options: Options): Promise<string> => {
 		const iconContentKey = `iconContent-${this.path}`;
 
+		return this.contentInternal(options);
 		const content = await cache.bento.getOrSet({
 			key: iconContentKey, 
 			factory: () => this.contentInternal(options),
