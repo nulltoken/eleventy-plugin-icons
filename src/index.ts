@@ -84,7 +84,7 @@ export default function (
 		},
 	);
 
-	const generateSVG = async (icon: Icon, hrefPrefix: string) => {
+	const generateSVG = async (icon: Icon, hrefPrefix: string): Promise<string> => {
 		const content = await icon.content(options);
 		if (!content) {
 			return '';
@@ -96,7 +96,8 @@ export default function (
 				content,
 				icon.attributes,
 				options.icon.overwriteExistingAttributes,
-			);
+				true,
+			)[0];
 		}
 
 		return icon.createSpriteReference(hrefPrefix);

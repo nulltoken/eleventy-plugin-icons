@@ -12,6 +12,7 @@ import {
 	log,
 	stringify,
 } from './utils';
+import assert from 'node:assert';
 
 export class Icon {
 	public name = '';
@@ -123,13 +124,18 @@ export const createSprite = async (
 	if (maybe !== undefined) return maybe;
 
 	const symbols: string[] = [];
+	const symbolsDefs: string[] = [];
 
 	for (const [path, icon] of dedupedIcons.entries()) {
 		const symbolKey = `symbol-${path}`;
+		const symbolDefsKey = `${symbolKey}-defs`;
 
 		const maybe = cache.get(symbolKey);
 		if (maybe !== undefined) {
+			const maybeDefs = cache.get(symbolDefsKey);
+			assert(maybeDefs !== undefined, 'Cached symbol is missing cached defs.');
 			symbols.push(maybe);
+			symbolsDefs.push(maybeDefs);
 			continue;
 		}
 
@@ -145,12 +151,17 @@ export const createSprite = async (
 			content,
 			{ id: options.icon.id(icon.name, icon.source) },
 			true,
-		)
+			false,
+		);
+
+		const replaced = processed[0]
 			.replace(/<svg/, '<symbol') // TODO: Avoid regex for changing tags.
 			.replace(/<\/svg>/, '</symbol>');
 
-		cache.set(symbolKey, processed);
-		symbols.push(processed);
+		cache.set(symbolKey, replaced);
+		cache.set(symbolDefsKey, processed[1]);
+		symbols.push(replaced);
+		symbolsDefs.push(processed[1]);
 	}
 
 	// Return an empty string if no symbols were generated.
@@ -158,10 +169,12 @@ export const createSprite = async (
 		return '';
 	}
 
+	// TODO: add all xmlns from inner svgs
+
 	// Combine the generated symbol strings.
 	const content = `<svg ${attributesToString(
 		options.sprite.attributes,
-	)}><defs></defs>${symbols.join('')}</svg>`;
+	)}><defs>${symbolsDefs.join('')}</defs>${symbols.join('')}</svg>`;
 
 	cache.set(combinedSpritesKey, content);
 
