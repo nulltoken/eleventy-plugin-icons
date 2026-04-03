@@ -161,7 +161,7 @@ export const createSprite = async (
 	// Combine the generated symbol strings.
 	const content = `<svg ${attributesToString(
 		options.sprite.attributes,
-	)}><defs>${symbols.join('')}</defs></svg>`;
+	)}><defs></defs>${symbols.join('')}</svg>`;
 
 	cache.set(combinedSpritesKey, content);
 
