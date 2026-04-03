@@ -3,10 +3,32 @@
 exports[`a spritesheet should be created with at least one icon on the page 1`] = `
 "<svg class="icon icon-star"><use href="#icon-star"></use></svg>
 <svg class="sprite-sheet" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs></defs>
+<!-- source: https://commons.wikimedia.org/wiki/File:2023_Facebook_icon.svg -->
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<symbol version="1.1" id="icon-2023_Facebook_icon" width="666.66669" height="666.66718" viewBox="0 0 666.66668 666.66717" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+  <defs id="defs13">
+    <clipPath clipPathUnits="userSpaceOnUse" id="clipPath25">
+      <path d="M 0,700 H 700 V 0 H 0 Z" id="path23"/>
+    </clipPath>
+  </defs>
+  <g id="g17" transform="matrix(1.3333333,0,0,-1.3333333,-133.33333,799.99999)">
+    <g id="g19">
+      <g id="g21" clip-path="url(#clipPath25)">
+        <g id="g27" transform="translate(600,350)">
+          <path d="m 0,0 c 0,138.071 -111.929,250 -250,250 -138.071,0 -250,-111.929 -250,-250 0,-117.245 80.715,-215.622 189.606,-242.638 v 166.242 h -51.552 V 0 h 51.552 v 32.919 c 0,85.092 38.508,124.532 122.048,124.532 15.838,0 43.167,-3.105 54.347,-6.211 V 81.986 c -5.901,0.621 -16.149,0.932 -28.882,0.932 -40.993,0 -56.832,-15.528 -56.832,-55.9 V 0 h 81.659 l -14.028,-76.396 h -67.631 V -248.169 C -95.927,-233.218 0,-127.818 0,0" style="fill:#0866ff;fill-opacity:1;fill-rule:nonzero;stroke:none" id="path29"/>
+        </g>
+        <g id="g31" transform="translate(447.9175,273.6036)">
+          <path d="M 0,0 14.029,76.396 H -67.63 v 27.019 c 0,40.372 15.838,55.899 56.831,55.899 12.733,0 22.981,-0.31 28.882,-0.931 v 69.253 c -11.18,3.106 -38.509,6.212 -54.347,6.212 -83.539,0 -122.048,-39.441 -122.048,-124.533 V 76.396 h -51.552 V 0 h 51.552 v -166.242 c 19.343,-4.798 39.568,-7.362 60.394,-7.362 10.254,0 20.358,0.632 30.288,1.831 L -67.63,0 Z" style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" id="path33"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</symbol>
 <!-- @license lucide-static v0.483.0 - ISC -->
 <symbol class="lucide lucide-star" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-star">
   <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/>
-</symbol></svg>"
+</symbol></svg>
+<svg class="icon icon-2023_Facebook_icon"><use href="#icon-2023_Facebook_icon"></use></svg>"
 `;
 
 exports[`supports external svg reference > when writeFile is set 1`] = `
@@ -22,6 +44,8 @@ exports[`supports external svg reference > when writeFile is set 1`] = `
         <svg class="scary-night icon icon-lock" stroke="#b1000d"><use href="/assets/icons/sprites.svg#icon-lock"></use></svg>
 <svg class="icon icon-apple"><use href="/assets/icons/sprites.svg#icon-apple"></use></svg>
 <svg class="starry-night icon icon-lock" stroke="#ed8a19"><use href="/assets/icons/sprites.svg#icon-lock"></use></svg>
+<svg class="icon icon-2023_Facebook_icon"><use href="/assets/icons/sprites.svg#icon-2023_Facebook_icon"></use></svg>
+<svg class="icon icon-Instagram_logo_2016"><use href="/assets/icons/sprites.svg#icon-Instagram_logo_2016"></use></svg>
 
         <svg class="starry-night icon icon-lock" stroke="#ed8a19"><use href="/assets/icons/sprites.svg#icon-lock"></use></svg>
     </body>
@@ -30,6 +54,48 @@ exports[`supports external svg reference > when writeFile is set 1`] = `
 
 exports[`supports external svg reference > when writeFile is set 2`] = `
 "<svg class="sprite-sheet" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs></defs>
+<!-- source: https://commons.wikimedia.org/wiki/File:2023_Facebook_icon.svg -->
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<symbol version="1.1" id="icon-2023_Facebook_icon" width="666.66669" height="666.66718" viewBox="0 0 666.66668 666.66717" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+  <defs id="defs13">
+    <clipPath clipPathUnits="userSpaceOnUse" id="clipPath25">
+      <path d="M 0,700 H 700 V 0 H 0 Z" id="path23"/>
+    </clipPath>
+  </defs>
+  <g id="g17" transform="matrix(1.3333333,0,0,-1.3333333,-133.33333,799.99999)">
+    <g id="g19">
+      <g id="g21" clip-path="url(#clipPath25)">
+        <g id="g27" transform="translate(600,350)">
+          <path d="m 0,0 c 0,138.071 -111.929,250 -250,250 -138.071,0 -250,-111.929 -250,-250 0,-117.245 80.715,-215.622 189.606,-242.638 v 166.242 h -51.552 V 0 h 51.552 v 32.919 c 0,85.092 38.508,124.532 122.048,124.532 15.838,0 43.167,-3.105 54.347,-6.211 V 81.986 c -5.901,0.621 -16.149,0.932 -28.882,0.932 -40.993,0 -56.832,-15.528 -56.832,-55.9 V 0 h 81.659 l -14.028,-76.396 h -67.631 V -248.169 C -95.927,-233.218 0,-127.818 0,0" style="fill:#0866ff;fill-opacity:1;fill-rule:nonzero;stroke:none" id="path29"/>
+        </g>
+        <g id="g31" transform="translate(447.9175,273.6036)">
+          <path d="M 0,0 14.029,76.396 H -67.63 v 27.019 c 0,40.372 15.838,55.899 56.831,55.899 12.733,0 22.981,-0.31 28.882,-0.931 v 69.253 c -11.18,3.106 -38.509,6.212 -54.347,6.212 -83.539,0 -122.048,-39.441 -122.048,-124.533 V 76.396 h -51.552 V 0 h 51.552 v -166.242 c 19.343,-4.798 39.568,-7.362 60.394,-7.362 10.254,0 20.358,0.632 30.288,1.831 L -67.63,0 Z" style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" id="path33"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</symbol>
+<!-- source: https://commons.wikimedia.org/wiki/File:Instagram_logo_2016.svg -->
+<symbol xmlns="http://www.w3.org/2000/svg" width="132.004" height="132" xmlns:xlink="http://www.w3.org/1999/xlink" id="icon-Instagram_logo_2016">
+  <defs>
+    <linearGradient id="b">
+      <stop offset="0" stop-color="#3771c8"/>
+      <stop stop-color="#3771c8" offset=".128"/>
+      <stop offset="1" stop-color="#60f" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="a">
+      <stop offset="0" stop-color="#fd5"/>
+      <stop offset=".1" stop-color="#fd5"/>
+      <stop offset=".5" stop-color="#ff543e"/>
+      <stop offset="1" stop-color="#c837ab"/>
+    </linearGradient>
+    <radialGradient id="c" cx="158.429" cy="578.088" r="65" xlink:href="#a" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0 -1.98198 1.8439 0 -1031.402 454.004)" fx="158.429" fy="578.088"/>
+    <radialGradient id="d" cx="147.694" cy="473.455" r="65" xlink:href="#b" gradientUnits="userSpaceOnUse" gradientTransform="matrix(.17394 .86872 -3.5818 .71718 1648.348 -458.493)" fx="147.694" fy="473.455"/>
+  </defs>
+  <path fill="url(#c)" d="M65.03 0C37.888 0 29.95.028 28.407.156c-5.57.463-9.036 1.34-12.812 3.22-2.91 1.445-5.205 3.12-7.47 5.468C4 13.126 1.5 18.394.595 24.656c-.44 3.04-.568 3.66-.594 19.188-.01 5.176 0 11.988 0 21.125 0 27.12.03 35.05.16 36.59.45 5.42 1.3 8.83 3.1 12.56 3.44 7.14 10.01 12.5 17.75 14.5 2.68.69 5.64 1.07 9.44 1.25 1.61.07 18.02.12 34.44.12 16.42 0 32.84-.02 34.41-.1 4.4-.207 6.955-.55 9.78-1.28 7.79-2.01 14.24-7.29 17.75-14.53 1.765-3.64 2.66-7.18 3.065-12.317.088-1.12.125-18.977.125-36.81 0-17.836-.04-35.66-.128-36.78-.41-5.22-1.305-8.73-3.127-12.44-1.495-3.037-3.155-5.305-5.565-7.624C116.9 4 111.64 1.5 105.372.596 102.335.157 101.73.027 86.19 0H65.03z" transform="translate(1.004 1)"/>
+  <path fill="url(#d)" d="M65.03 0C37.888 0 29.95.028 28.407.156c-5.57.463-9.036 1.34-12.812 3.22-2.91 1.445-5.205 3.12-7.47 5.468C4 13.126 1.5 18.394.595 24.656c-.44 3.04-.568 3.66-.594 19.188-.01 5.176 0 11.988 0 21.125 0 27.12.03 35.05.16 36.59.45 5.42 1.3 8.83 3.1 12.56 3.44 7.14 10.01 12.5 17.75 14.5 2.68.69 5.64 1.07 9.44 1.25 1.61.07 18.02.12 34.44.12 16.42 0 32.84-.02 34.41-.1 4.4-.207 6.955-.55 9.78-1.28 7.79-2.01 14.24-7.29 17.75-14.53 1.765-3.64 2.66-7.18 3.065-12.317.088-1.12.125-18.977.125-36.81 0-17.836-.04-35.66-.128-36.78-.41-5.22-1.305-8.73-3.127-12.44-1.495-3.037-3.155-5.305-5.565-7.624C116.9 4 111.64 1.5 105.372.596 102.335.157 101.73.027 86.19 0H65.03z" transform="translate(1.004 1)"/>
+  <path fill="#fff" d="M66.004 18c-13.036 0-14.672.057-19.792.29-5.11.234-8.598 1.043-11.65 2.23-3.157 1.226-5.835 2.866-8.503 5.535-2.67 2.668-4.31 5.346-5.54 8.502-1.19 3.053-2 6.542-2.23 11.65C18.06 51.327 18 52.964 18 66s.058 14.667.29 19.787c.235 5.11 1.044 8.598 2.23 11.65 1.227 3.157 2.867 5.835 5.536 8.503 2.667 2.67 5.345 4.314 8.5 5.54 3.054 1.187 6.543 1.996 11.652 2.23 5.12.233 6.755.29 19.79.29 13.037 0 14.668-.057 19.788-.29 5.11-.234 8.602-1.043 11.656-2.23 3.156-1.226 5.83-2.87 8.497-5.54 2.67-2.668 4.31-5.346 5.54-8.502 1.18-3.053 1.99-6.542 2.23-11.65.23-5.12.29-6.752.29-19.788 0-13.036-.06-14.672-.29-19.792-.24-5.11-1.05-8.598-2.23-11.65-1.23-3.157-2.87-5.835-5.54-8.503-2.67-2.67-5.34-4.31-8.5-5.535-3.06-1.187-6.55-1.996-11.66-2.23-5.12-.233-6.75-.29-19.79-.29zm-4.306 8.65c1.278-.002 2.704 0 4.306 0 12.816 0 14.335.046 19.396.276 4.68.214 7.22.996 8.912 1.653 2.24.87 3.837 1.91 5.516 3.59 1.68 1.68 2.72 3.28 3.592 5.52.657 1.69 1.44 4.23 1.653 8.91.23 5.06.28 6.58.28 19.39s-.05 14.33-.28 19.39c-.214 4.68-.996 7.22-1.653 8.91-.87 2.24-1.912 3.835-3.592 5.514-1.68 1.68-3.275 2.72-5.516 3.59-1.69.66-4.232 1.44-8.912 1.654-5.06.23-6.58.28-19.396.28-12.817 0-14.336-.05-19.396-.28-4.68-.216-7.22-.998-8.913-1.655-2.24-.87-3.84-1.91-5.52-3.59-1.68-1.68-2.72-3.276-3.592-5.517-.657-1.69-1.44-4.23-1.653-8.91-.23-5.06-.276-6.58-.276-19.398s.046-14.33.276-19.39c.214-4.68.996-7.22 1.653-8.912.87-2.24 1.912-3.84 3.592-5.52 1.68-1.68 3.28-2.72 5.52-3.592 1.692-.66 4.233-1.44 8.913-1.655 4.428-.2 6.144-.26 15.09-.27zm29.928 7.97c-3.18 0-5.76 2.577-5.76 5.758 0 3.18 2.58 5.76 5.76 5.76 3.18 0 5.76-2.58 5.76-5.76 0-3.18-2.58-5.76-5.76-5.76zm-25.622 6.73c-13.613 0-24.65 11.037-24.65 24.65 0 13.613 11.037 24.645 24.65 24.645C79.617 90.645 90.65 79.613 90.65 66S79.616 41.35 66.003 41.35zm0 8.65c8.836 0 16 7.163 16 16 0 8.836-7.164 16-16 16-8.837 0-16-7.164-16-16 0-8.837 7.163-16 16-16z"/>
+</symbol>
 <!-- @license lucide-static v0.483.0 - ISC -->
 <symbol class="lucide lucide-apple" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-apple">
   <path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z"/>
