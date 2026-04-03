@@ -92,7 +92,7 @@ export default function (
 
 		if (generationMode === GenerationMode.Inlined) {
 			return processXMLIcon(
-				icon.path,
+				icon.originId,
 				content,
 				icon.attributes,
 				options.icon.overwriteExistingAttributes,

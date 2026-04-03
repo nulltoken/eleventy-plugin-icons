@@ -16,10 +16,10 @@ import {
 export class Icon {
 	public name = '';
 	public source = '';
-	public path = '';
+	private path = '';
 	public attributes: Attributes = {};
 	public id = '';
-	private originId = '';
+	public originId = '';
 
 	constructor(
 		input: { name: string; source: string } | string,
@@ -63,7 +63,7 @@ export class Icon {
 
 		this.attributes = handleIconShortcodeAttributes(attributes, options, this);
 
-		this.id = `${this.path}-${JSON.stringify(this.attributes)}`;
+		this.id = `${this.originId}-${JSON.stringify(this.attributes)}`;
 	}
 
 	stringified = () => stringify(this);
@@ -112,9 +112,9 @@ export const createSprite = async (
 	options: Options,
 ): Promise<string> => {
 	// Sort icons for consistent ordering.
-	icons.sort((a, b) => (a.path < b.path ? -1 : 1));
+	icons.sort((a, b) => (a.originId < b.originId ? -1 : 1));
 
-	const dedupedIcons = new Map(icons.map((item) => [item.path, item]));
+	const dedupedIcons = new Map(icons.map((item) => [item.originId, item]));
 	const dedupedIds = [...dedupedIcons.keys()];
 
 	const combinedSpritesKey = `sprites-${dedupedIds.join('/')}`;
@@ -141,7 +141,7 @@ export const createSprite = async (
 
 		// If content exists, convert it to a symbol element and add attributes.
 		const processed = processXMLIcon(
-			icon.path,
+			icon.originId,
 			content,
 			{ id: options.icon.id(icon.name, icon.source) },
 			true,

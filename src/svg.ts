@@ -24,19 +24,19 @@ const builder = new XMLBuilder({
 /**
  * Parses an SVG string and merges given attributes with existing ones.
  *
- * @param path - The file system path for the icon, for caching.
+ * @param originId - The unique identifier for the icon, for caching.
  * @param raw - The raw SVG string.
  * @param attributes - The attributes to be merged.
  * @param overwrite - Flag indicating whether to overwrite existing attributes.
  * @returns The modified SVG string.
  */
 export function processXMLIcon(
-	path: string,
+	originId: string,
 	raw: string,
 	attributes: Attributes,
 	overwrite: boolean,
 ) {
-	const processedIconKey = `processedIcon-${path}-${JSON.stringify(attributes)}-${overwrite}`;
+	const processedIconKey = `processedIcon-${originId}-${JSON.stringify(attributes)}-${overwrite}`;
 
 	const maybe = cache.get(processedIconKey);
 	if (maybe !== undefined) return maybe;
